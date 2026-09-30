@@ -158,24 +158,17 @@ def quiz_kb(options, correct_id):
 @router.message(Command("start"))
 async def cmd_start(message: Message):
     await message.answer(
-        "🇦🇹 <b>Vena Vokabeltrainer</b>\n\n"
+        "<b>🇦🇹 Vena Vokabeltrainer</b>\n\n"
         "Nemischa so'zlarni o'yin orqali yodlaymiz!\n\n"
         "<b>Buyruqlar:</b>\n"
-        "/add — so'z qo'shish\n"
         "/quiz — variantli test\n"
         "/train — yozib tarjima qilish\n"
-        "/list — so'zlar ro'yxati\n"
-        "/stats — statistika\n"
-        "/reset — progressni noldan boshlash\n"
-        "/del — so'z o'chirish\n"
-        "/seed — namuna so'zlar yuklash\n\n"
-        "Boshlash uchun <code>/add</code> bilan so'z qo'sh yoki "
-        "<code>/seed</code> bilan 20 ta namuna yukla."
-    )
-
-
+        "/stats — statistika"
 @router.message(Command("add"))
 async def cmd_add(message: Message, state: FSMContext):
+if message.from_user.id != 1771731039:
+        await message.answer("Sizda bu huquq yo'q.")
+        return
     await message.answer(
         "So'zni shunday yubor:\n<code>der Hund | it</code>\n"
         "(old tomoni | orqa tomoni)"
@@ -205,6 +198,9 @@ async def process_add(message: Message, state: FSMContext):
 
 @router.message(Command("list"))
 async def cmd_list(message: Message):
+if message.from_user.id != 1771731039:
+await message.answer("Sizda bu huquq yo'q.")
+return
     words = get_words(message.from_user.id)
     if not words:
         await message.answer("Baza bo'sh. /add yoki /seed dan foydalan.")
@@ -243,12 +239,18 @@ async def cmd_stats(message: Message):
 
 @router.message(Command("reset"))
 async def cmd_reset(message: Message):
+if message.from_user.id != 1771731039:
+await message.answer("Sizda bu huquq yo'q.")
+return
     reset_user(message.from_user.id)
     await message.answer("♻️ Progress noldan boshlandi.")
 
 
 @router.message(Command("del"))
 async def cmd_del(message: Message):
+if message.from_user.id != 1771731039:
+await message.answer("Sizda bu huquq yo'q.")
+return
     words = get_words(message.from_user.id)
     if not words:
         await message.answer("O'chiradigan so'z yo'q.")

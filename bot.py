@@ -13,6 +13,7 @@ import random
 import sqlite3
 
 from aiogram import Bot, Dispatcher, F, Router
+from aiogram.client.default import DefaultBotProperties
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
@@ -33,7 +34,7 @@ DB = "vokabeln.db"
 # Max repetitions (Leitner boxes): 0 = brand new, 5 = learned
 MAX_BOX = 5
 
-bot = Bot(token=BOT_TOKEN)
+bot = Bot(token=BOT_TOKEN, default=DefaultBotProperties(parse_mode="html"))
 dp = Dispatcher(storage=MemoryStorage())
 router = Router()
 dp.include_router(router)

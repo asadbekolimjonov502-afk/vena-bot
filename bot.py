@@ -157,13 +157,15 @@ def quiz_kb(options, correct_id):
 # --------------------------------------------------------------------------- #
 @router.message(Command("start"))
 async def cmd_start(message: Message):
-    await message.answer(
+    text = (
         "<b>🇦🇹 Vena Vokabeltrainer</b>\n\n"
-        "Nemischa so'zlarni o'yin orqali yodlaymiz!\n\n"
+        "Nemischa so'zlarni test va o'yin orqali yodlaymiz!\n\n"
         "<b>Buyruqlar:</b>\n"
         "/quiz — variantli test\n"
         "/train — yozib tarjima qilish\n"
         "/stats — statistika"
+    )
+    await message.answer(text)
 @router.message(Command("add"))
 async def cmd_add(message: Message, state: FSMContext):
 if message.from_user.id != 1771731039:
